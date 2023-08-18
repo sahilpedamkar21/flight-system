@@ -1,87 +1,86 @@
-const {CityService} = require('../services/index');
+const { CityService } = require('../services/index');
 
 const cityService = new CityService();
 
-const create = async (req,res) => {
-    try{
+const create = async (req, res) => {
+    try {
         const city = await cityService.createCity(req.body);
         return res.status(201).json({
             data: city,
             success: true,
-            message: "successfully created a city",
+            message: 'Successfully created a city',
             err: {}
         });
-    } catch(error){
+    } catch (error) {
         console.log(error);
         return res.status(500).json({
             data: {},
             success: false,
-            message: "not able to create city",
+            message: 'Not able to create a city',
             err: error
-        })
+        });
     }
-
 }
-
-const destroy = async(req,res) => {
-    try{
+// DELETE. -> /city/:id
+const destroy = async (req, res) => {
+    try {
         const response = await cityService.deleteCity(req.params.id);
         return res.status(200).json({
             data: response,
             success: true,
-            message: "successfully deleteed a city",
+            message: 'Successfully deleted a city',
             err: {}
         });
-    } catch(error){
+    } catch (error) {
         console.log(error);
         return res.status(500).json({
             data: {},
             success: false,
-            message: "not able to delete city",
+            message: 'Not able to delete the city',
             err: error
-        })
+        });
     }
-
 }
 
-const get = async(req,res) => {
-    try{
+// GET -> /city/:id
+const get = async (req, res) => {
+    try {
         const response = await cityService.getCity(req.params.id);
         return res.status(200).json({
             data: response,
             success: true,
-            message: "successfully fetched a city",
+            message: 'Successfully fetched a city',
             err: {}
         });
-    } catch(error){
+    } catch (error) {
         console.log(error);
         return res.status(500).json({
             data: {},
             success: false,
-            message: "not able to get city",
+            message: 'Not able to get the city',
             err: error
-        })
+        });
     }
-
 }
 
-const update = async(req,res) => {
-    try{
+// Patch -> /city/:id -> req.body
+const update = async (req, res) => {
+    try {
         const response = await cityService.updateCity(req.params.id, req.body);
         return res.status(200).json({
             data: response,
             success: true,
-            message: "successfully updated a city",
+            message: 'Successfully fetched a city',
             err: {}
         });
-    } catch(error){
+    } catch (error) {
         console.log(error);
         return res.status(500).json({
             data: {},
             success: false,
-            message: "not able to update city",
+            message: 'Not able to update the city',
             err: error
-        })
+        });
     }
 }
 
@@ -91,7 +90,3 @@ module.exports = {
     get,
     update
 }
-
-
-
-// CONTROLLER --> SERVICE --> REPOSITORY

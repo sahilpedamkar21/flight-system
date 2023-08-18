@@ -13,7 +13,7 @@ class CityRepository{
     }
 
  // delete a particular city from database
-    async deleteCity({cityId}){
+    async deleteCity(cityId){
         try{
             await City.destroy({
                 where: {
@@ -45,13 +45,20 @@ class CityRepository{
     }
 
 
-    async getCity(cityId){
-        try{
-            const city = await City.findByPk(cityId);
+    async getCity(cityId) {
+        try {
+            const city = await City.findOne({
+                where: {
+                    id: cityId
+                }
+            });
+           // city.name = data.name;
+           // await city
             return city;
-        }   catch(error){
-                console.log("somethoung wrong in getcity");
-                throw {error};
+        } catch (error) {
+            console.log(cityId);
+            console.log("Something went wrong in the repository layer");
+            throw {error};
         }
     }
 
